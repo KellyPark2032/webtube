@@ -12,4 +12,4 @@ videoRouter.get("/:id(\\d+)/edit", edit);
 videoRouter.get("/:id(\\d+)/delete", deleteVideo);
 videoRouter.get("/upload", upload);
 
-export default videoRouter;
+export default videoRouter; 
