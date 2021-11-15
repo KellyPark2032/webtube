@@ -1,0 +1,11 @@
+doctype html
+html(lang="ko")
+    head 
+        title #{pageTitle} | Webtube
+        link(rel="stylesheet" href="https://unpkg.com/mvp.css")
+    body 
+        main
+            //- block can add some contents
+            block content
+    //- inherit and extend is awesome!!
+    include partials/footer.pug

@@ -6,12 +6,18 @@ import videoRouter from "./routers/videoRouter";
 
 const PORT = 4000;
 
+console.log(process.cwd());
+
 // create express application called "app"
 const app = express();
 
 // Middleware doesn't respond to the request.
 // we will use morgan.
 const logger = morgan("dev");
+
+app.set("view engine", "pug");
+app.set("views", process.cwd() + "/src/views");
+
 app.use(logger);
 
 // configure our application about how to "get" request
