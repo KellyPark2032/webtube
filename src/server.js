@@ -20,6 +20,10 @@ app.set("view engine", "pug");
 // Middleware doesn't respond to the request.
 // we will use morgan.
 const logger = morgan("dev");
+
+app.set("view engine", "pug");
+app.set("views", process.cwd() + "/src/views");
+
 app.use(logger);
 
 // configure our application about how to "get" request
