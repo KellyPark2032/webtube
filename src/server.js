@@ -6,8 +6,16 @@ import videoRouter from "./routers/videoRouter";
 
 const PORT = 4000;
 
+// find Current Working Directory
+// Current Working Directory is that starting Node.js
+console.log(process.cwd());
+
 // create express application called "app"
 const app = express();
+
+// setting express to use view engine
+// when send file to pug, pug change this file to HTML
+app.set("view engine", "pug");
 
 // Middleware doesn't respond to the request.
 // we will use morgan.
