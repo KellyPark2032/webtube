@@ -8,7 +8,6 @@ const videoRouter = express.Router();
 // (\\d+) = 'digit', 숫자만.
 // (nico\w+) = 'nico'가 포함이 된 모든 문자, 숫자만.
 videoRouter.get("/:id(\\d+)", watch);
-videoRouter.get("/:id(\\d+)/edit", getEdit);
-videoRouter.post("/:id(\\d+)/edit", postEdit);
+videoRouter.route("/:id(\\d+)/edit").get(getEdit).post(postEdit);
 
 export default videoRouter;

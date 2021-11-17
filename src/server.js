@@ -26,6 +26,9 @@ app.set("views", process.cwd() + "/src/views");
 
 app.use(logger);
 
+// express application understand and transform the form's value into javascript
+app.use(express.urlencoded({ extended: true }));
+
 // configure our application about how to "get" request
 // GET = one of the HTTP METHOD
 app.use("/", globalRouter);
