@@ -15,7 +15,6 @@ const app = express();
 
 // setting express to use view engine
 // when send file to pug, pug change this file to HTML
-app.set("view engine", "pug");
 
 // Middleware doesn't respond to the request.
 // we will use morgan.
