@@ -13,14 +13,12 @@ console.log(process.cwd())
 // create express application called "app"
 const app = express()
 
-// setting express to use view engine
-// when send file to pug, pug change this file to HTML
-app.set('view engine', 'pug')
-
 // Middleware doesn't respond to the request.
 // we will use morgan.
 const logger = morgan('dev')
 
+// setting express to use view engine
+// when send file to pug, pug change this file to HTML
 app.set('view engine', 'pug')
 app.set('views', process.cwd() + '/src/views')
 
