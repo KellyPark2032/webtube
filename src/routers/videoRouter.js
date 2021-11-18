@@ -1,5 +1,5 @@
 import express from "express";
-import { see, edit, deleteVideo, upload } from "../controllers/videoController"
+import { watch, getEdit, postEdit } from "../controllers/videoController";
 
 const videoRouter = express.Router();
 
@@ -7,9 +7,7 @@ const videoRouter = express.Router();
 // this allows you have urls that have variables inside of them
 // (\\d+) = 'digit', 숫자만.
 // (nico\w+) = 'nico'가 포함이 된 모든 문자, 숫자만.
-videoRouter.get("/:id(\\d+)", see);
-videoRouter.get("/:id(\\d+)/edit", edit);
-videoRouter.get("/:id(\\d+)/delete", deleteVideo);
-videoRouter.get("/upload", upload);
- 
-export default videoRouter; 
+videoRouter.get("/:id(\\d+)", watch);
+videoRouter.route("/:id(\\d+)/edit").get(getEdit).post(postEdit);
+
+export default videoRouter;
