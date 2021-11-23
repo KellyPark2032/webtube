@@ -1,13 +1,8 @@
-import "./db";
-import "./models/Video";
 import express from "express";
 import morgan from "morgan";
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
-
-const PORT = 4000;
-
 // find Current Working Directory
 // Current Working Directory is that starting Node.js
 // console.log(process.cwd())
@@ -48,8 +43,4 @@ const login = (req, res) => {
 	return res.send("login");
 };
 
-const handleListening = () =>
-	console.log(`✅ Server listening on port ${PORT}`);
-
-// we have to make listen application
-app.listen(PORT, handleListening);
+export default app
