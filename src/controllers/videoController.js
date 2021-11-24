@@ -2,7 +2,8 @@ import Video from "../models/Video";
 // multiple export
 export const home = async (req, res) => {
 	// {} => search terms : 비어있으면 모든 형식을 말함.
-	const videos = await Video.find({});
+	// desc <-> asc
+	const videos = await Video.find({}).sort({ createdAt: "desc" });
 	// console.log(videos);
 	// use variables
 	return res.render("home", { pageTitle: "Home", videos });
@@ -60,4 +61,27 @@ export const postUpload = async (req, res) => {
 			errorMessage: error._message,
 		});
 	}
+};
+
+export const deleteVideo = async (req, res) => {
+	const { id } = req.params;
+	await Video.findByIdAndDelete(id);
+	return res.redirect("/");
+};
+
+export const search = async (req, res) => {
+	const { keyword } = req.query;
+	let videos = [];
+	if (keyword) {
+		videos = await Video.find({
+			title: {
+				// regular expressiong
+				// ^ = only contains word when starting
+				// $ = only contains word when ending
+				$regex: new RegExp(`${keyword}`, "i"),
+				// $gt: 3 : greater than 3
+			},
+		});
+	}
+	return res.render("search", { pageTitle: "Search", videos });
 };
