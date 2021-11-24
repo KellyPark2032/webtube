@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://127.0.0.1:27017/webtue", {
+mongoose.connect("mongodb://127.0.0.1:27017/webtube", {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
@@ -13,8 +13,4 @@ const handleError = (error) => console.log("❌ DB Error", error);
 db.on("error", handleError);
 db.once("open", handleOpen);
 
-// CRUD
-// CREATE
-// READ
-// UPDATE
-// DELETE
+// CRUD => CREATE / READ / UPDATE / DELETE
