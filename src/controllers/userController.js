@@ -1,8 +1,34 @@
+import User from "../models/User";
+
 // multiple export
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
-export const postJoin = (req, res) => {
+export const postJoin = async (req, res) => {
 	console.log(req.body);
-	req.end();
+	const { name, username, email, password, password2, location } = req.body;
+	const pageTitle = "Join";
+	if (password !== password2) {
+		return res.status(400).passwordrender("join", {
+			pageTitle,
+			errorMessage: "Password confirm does not match.",
+		});
+	}
+	//usernameExists
+	const exists = await User.exists({ $or: [{ username }, { email }] });
+	if (exists) {
+		return res.status(400).render("join", {
+			pageTitle,
+			errorMessage: "This username/email is already taken.",
+		});
+	}
+
+	await User.create({
+		name,
+		username,
+		email,
+		password,
+		location,
+	});
+	return res.redirect("/login");
 };
 export const login = (req, res) => res.send("Login");
 
