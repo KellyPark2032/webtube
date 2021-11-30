@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import User from "../models/User"
-
-// multiple export
-export const getJoin = (req, res) => res.render("createAccount", {pageTitle: "Join"});
-export const postJoin = async (req, res) => {
-    console.log(req.body);
-    const {name, username, email, password, location} = req.body;
-    await User.create({
-        name, username, email, password, location,
-    });
-    return res.redirect("/login");
-};
-export const login = (req, res) => res.send("Login");
-=======
 import User from "../models/User";
 import bcrypt from "bcrypt";
 
@@ -55,7 +40,6 @@ export const postJoin = async (req, res) => {
 };
 export const getLogin = (req, res) =>
 	res.render("login", { pageTitle: "Login" });
->>>>>>> 1e994d6392108d866be69dd7405e8c258dd10e78
 
 export const postLogin = async (req, res) => {
 	const { username, password } = req.body;
