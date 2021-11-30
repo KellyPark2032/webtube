@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import globalRouter from "./routers/globalRouter";
+import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 // find Current Working Directory
@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // configure our application about how to "get" request
 // GET = one of the HTTP METHOD
-app.use("/", globalRouter);
+app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 // app.get("/", home);
