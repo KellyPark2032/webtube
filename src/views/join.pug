@@ -1,10 +1,26 @@
 extends base
 
+<<<<<<< HEAD
 block content
+=======
+block content 
+    if errorMessage
+        span=errorMessage
+>>>>>>> 1e994d6392108d866be69dd7405e8c258dd10e78
     form(method="POST")
         input(placeholder="Name" name="name", type="text", required)
         input(placeholder="Email" name="email", type="email", required)
         input(placeholder="Username" name="username", type="text", required)
         input(placeholder="Password" name="password", type="password", required)
+<<<<<<< HEAD
         input(placeholder="Location" name="location", type="text", required)
         input(type="submit", value="Join")
+=======
+        input(placeholder="Confirm Password" name="password2", type="password", required)
+        input(placeholder="Location" name="location", type="text", required)
+        input(type="submit" value="Join")
+        hr
+        div 
+            span Already have an account? 
+            a(href="/login") Log in now &rarr;
+>>>>>>> 1e994d6392108d866be69dd7405e8c258dd10e78

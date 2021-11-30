@@ -1,6 +1,10 @@
 import express from "express";
 import morgan from "morgan";
+<<<<<<< HEAD
 import rootRouter from "./routers/rootRouter";
+=======
+import globalRouter from "./routers/rootRouter";
+>>>>>>> 1e994d6392108d866be69dd7405e8c258dd10e78
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 // find Current Working Directory
@@ -43,4 +47,4 @@ const login = (req, res) => {
 	return res.send("login");
 };
 
-export default app
+export default app;
