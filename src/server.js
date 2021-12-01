@@ -1,9 +1,12 @@
 import express from "express";
 import morgan from "morgan";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+import { localsMiddleware } from "./middlewares";
+import MongoStore from "connect-mongo";
 // find Current Working Directory
 // Current Working Directory is that starting Node.js
 // console.log(process.cwd())
@@ -26,33 +29,26 @@ app.use(logger);
 // express application understand and transform the form's value into javascript
 app.use(express.urlencoded({ extended: true }));
 
+// make middleware from module named 'express-session'
+// this middleware named 'session' post 'cookie'
+// http => stateless, so we can use cookie or session ID
+// session data is not saved in the cookie itself, jsut the session ID.
+// session data is stored server-side.
 app.use(
 	session({
-		secret: "Hello!",
-		resave: true,
-		saveUninitialized: true,
+		secret: process.env.COOKIE_SECRET, // secret: string that uses when sign in cookies.
+		resave: false,
+		saveUninitialized: false,
+		store: MongoStore.create({ mongoUrl: process.env.DB_URL })
 	})
 );
 
-app.use((req, res, next) => {
-	req.sessionStore.all((error, sessions) => {
-		console.log(sessions);
-		next();
-	});
-});
-
-app.get("/add-one", (req, res, next) => {
-	req.session.potato += 1;
-	return res.send(`${req.session.id} ${req.session.potato}`);
-});
-
 // configure our application about how to "get" request
 // GET = one of the HTTP METHOD
+app.use(localsMiddleware);
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
-// app.get("/", home);
-// app.get("/login", login);
 
 // route handler has two objects => req, res (+ next)
 // handler = controller, and all controllers have middleware.
