@@ -1,10 +1,10 @@
 import express from "express";
 import morgan from "morgan";
 import session from "express-session";
-import mongoStore from "connect-mongo";
+import MongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter";
-import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+import userRouter from "./routers/userRouter";
 import { localsMiddleware } from "./middlewares";
 // find Current Working Directory
 // Current Working Directory is that starting Node.js
@@ -38,7 +38,7 @@ app.use(
 		secret: process.env.COOKIE_SECRET, // secret: string that uses when sign in cookies.
 		resave: false,
 		saveUninitialized: false,
-		store: mongoStore.create({ mongoUrl: process.env.DB_URL })
+		store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
 	})
 );
 
@@ -48,15 +48,5 @@ app.use(localsMiddleware);
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
-
-// route handler has two objects => req, res (+ next)
-// handler = controller, and all controllers have middleware.
-const home = (req, res) => {
-	console.log("I will respond.");
-	res.send("hello");
-};
-const login = (req, res) => {
-	return res.send("login");
-};
 
 export default app;

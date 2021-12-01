@@ -11,6 +11,8 @@ import { home, search } from "../controllers/videoController";
 // Every Router is bubble.
 const rootRouter = express.Router();
 
+// route handler has two objects => req, res (+ next)
+// handler = controller, and all controllers have middleware.
 rootRouter.get("/", home);
 rootRouter.route("/join").get(getJoin).post(postJoin);
 rootRouter.route("/login").get(getLogin).post(postLogin);
