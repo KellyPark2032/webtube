@@ -1,12 +1,11 @@
 import express from "express";
 import morgan from "morgan";
 import session from "express-session";
-import MongoStore from "connect-mongo";
+import mongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import { localsMiddleware } from "./middlewares";
-import MongoStore from "connect-mongo";
 // find Current Working Directory
 // Current Working Directory is that starting Node.js
 // console.log(process.cwd())
@@ -39,7 +38,7 @@ app.use(
 		secret: process.env.COOKIE_SECRET, // secret: string that uses when sign in cookies.
 		resave: false,
 		saveUninitialized: false,
-		store: MongoStore.create({ mongoUrl: process.env.DB_URL })
+		store: mongoStore.create({ mongoUrl: process.env.DB_URL })
 	})
 );
 
