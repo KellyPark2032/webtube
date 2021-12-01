@@ -1,5 +1,6 @@
 import express from "express";
 import morgan from "morgan";
+import session from "express-session";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
@@ -24,6 +25,26 @@ app.use(logger);
 
 // express application understand and transform the form's value into javascript
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+	session({
+		secret: "Hello!",
+		resave: true,
+		saveUninitialized: true,
+	})
+);
+
+app.use((req, res, next) => {
+	req.sessionStore.all((error, sessions) => {
+		console.log(sessions);
+		next();
+	});
+});
+
+app.get("/add-one", (req, res, next) => {
+	req.session.potato += 1;
+	return res.send(`${req.session.id} ${req.session.potato}`);
+});
 
 // configure our application about how to "get" request
 // GET = one of the HTTP METHOD
